@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}"></title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+<div class="header">
+    <h1>PlanOptima</h1>
+    <ul class="menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/cabinet">Cabinet</a></li>
+        <li><a href="/calendar">Calendar</a></li>
+        <li><a href="/check">Check</a></li>
+        <li><a href="/about">About</a></li>
+    </ul>
+    <button class="login-button">로그인</button>
+</div>
+<div style="text-align: center; margin-top: 50px;">
+    <h2>Plan Optima를 통해 <br> 나만의 효율적인 일정을 <br> 계획해 보세요</h2>
+</div>
+
+<form th:action="@{/create}" method="post">
+    <div>
+        <label>스케줄명을 적어주세요</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+
+    <div>
+        <label>시작 날짜를 입력해 주세요</label>
+        <input type="date" id="startTime" name="startTime" required>
+    </div>
+    <div>
+        <label>데드라인을 기입해 주세요</label>
+        <input type="date" id="deadLine" name="deadLine" required>
+    </div>
+    <div>
+        <label>내가 생각하는 작업 난이도?</label>
+        <input type="range" id="difficulty" name="difficulty" min="1" max="10" required>
+    </div>
+
+    <div>
+        <label>원하는 휴식시간 정도?</label>
+        <input type="text" id="restTime" name="restTime" required>
+    </div>
+    <label>내가 생각하는 우선순위?</label>
+    <canvas id="priorityCanvas" width="400" height="400"></canvas>
+    <input type="hidden" id="importance" name="importance" value="">
+    <input type="hidden" id="urgency" name="urgency" value="">
+
+    <div>
+        <label>작업 관련 스트레스 수준?</label>
+        <div class="stress-container">
+            <canvas id="stressCanvas" width="400" height="600"></canvas>
+            <input type="range" id="stressSlider" name="stress" min="1" max="10" step="1" value="1" orient="vertical" required>
+            <div id="stressValue">스트레스 수준 </div>
+        </div>
+    </div>
+
+    <div>
+        <label>작업 선호 시간대:</label>
+        <div class="time-preference">
+            <div class="time-option" data-time="새벽">새벽</div>
+            <div class="time-option" data-time="아침">아침</div>
+            <div class="time-option" data-time="점심">점심</div>
+            <div class="time-option" data-time="저녁">저녁</div>
+            <div class="time-option" data-time="밤">밤</div>
+        </div>
+        <input type="hidden" id="preferenceTime" name="preferenceTime" required>
+    </div>
+
+    <div>
+        <button type="submit">제출</button>
+    </div>
+</form>
+
+<script src="/js/index.js"></script>
+<script src="/js/stress.js"></script>
+<script src="/js/timePreference.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+/* 기본 스타일 */
+#calendar {
+    margin: 0 auto;
+}
+
+.fc-daygrid-day {
+    cursor: pointer;
+}
+
+.fc-daygrid-day.fc-daygrid-day-selected {
+    background-color: lightblue !important;
+    color: white !important;
+}
+
+.fc-daygrid-day.fc-daygrid-day-highlight {
+    background-color: #fff9c4 !important; /* 연한 노랑색 */
+    border: 2px solid #ffab00 !important; /* 형광 주황색 테두리 */
+}
+
+.side-label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.save-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .side-label {
+        right: 0;
+    }
+}

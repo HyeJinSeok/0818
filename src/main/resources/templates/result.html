@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission Result</title>
+</head>
+<body>
+<header>
+    <div class="logo">PlanOptima</div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/cabinet}">Cabinet</a></li>
+            <li><a th:href="@{/calendar}">Calendar</a></li>
+            <li><a th:href="@{/check}">Check</a></li>
+            <li><a th:href="@{/about}">About</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div>
+        <p>스케줄명: <span th:text="${schedule.name}"></span></p>
+        <p>현재 날짜: <span th:text="${schedule.startTime}"></span></p>
+        <p>데드라인: <span th:text="${schedule.deadLine}"></span></p>
+        <p>작업 난이도: <span th:text="${schedule.difficulty}"></span></p>
+        <p>원하는 휴식시간: <span th:text="${schedule.restTime}"></span></p>
+        <p>우선순위:</p>
+        <p>중요도: <span th:text="${schedule.importance}"></span></p>
+        <p>긴급도: <span th:text="${schedule.urgency}"></span></p>
+        <p>스트레스 수준: <span th:text="${schedule.stress}"></span></p>
+        <p>선택한 선호 시간대: <span th:text="${schedule.preferenceTime}"></span></p>
+    </div>
+    <div>
+        <form th:action="@{/select/{id}(id=${id})}" method="get">
+            <button type="submit">다음</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

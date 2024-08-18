@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="/css/calendar.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+</head>
+<body>
+<h1>캘린더</h1>
+<div id='calendar' style="max-width: 900px; margin: 0 auto;"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the selected dates and schedule name from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const datesStr = urlParams.get('dates');
+        const scheduleName = urlParams.get('scheduleName'); // 스케줄 이름 가져오기
+        const selectedDates = datesStr ? JSON.parse(decodeURIComponent(datesStr)) : [];
+
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            events: selectedDates.map(dateStr => ({
+                title: scheduleName ? scheduleName : '선택한 일정', // 실제 스케줄 이름 표시
+                start: dateStr,
+                end: new Date(new Date(dateStr).getTime() + 86400000).toISOString().split('T')[0],
+                backgroundColor: 'blue',
+                borderColor: 'lightblue'
+            }))
+        });
+        calendar.render();
+    });
+</script>
+</body>
+</html>

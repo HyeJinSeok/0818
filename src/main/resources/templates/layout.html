@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlanOptima</title>
+    <style>
+        /* Header 스타일 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .menu {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .menu li {
+            margin-right: 15px;
+        }
+
+        .menu li:last-child {
+            margin-right: 0;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+        .login-button {
+            background-color: #4CAF50; /* 초록색 */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px; /* 버튼의 모서리를 둥글게 */
+        }
+
+        .login-button:hover {
+            background-color: #45a049; /* 버튼의 호버 색상 */
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>PlanOptima</h1>
+    <ul class="menu">
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a th:href="@{/cabinet}">Cabinet</a></li>
+        <li><a th:href="@{/calendar}">Calendar</a></li>
+        <li><a th:href="@{/check}">Check</a></li>
+        <li><a th:href="@{/about}">About</a></li>
+    </ul>
+    <button class="login-button">로그인</button>
+</div>
+
+<!-- Thymeleaf로 렌더링되는 콘텐츠는 이곳에 포함됩니다 -->
+<div th:fragment="content" th:replace="${fragment}"></div>
+
+</body>
+</html>

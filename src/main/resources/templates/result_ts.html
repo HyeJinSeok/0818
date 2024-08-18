@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .info-section {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .info-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .info-content {
+            font-size: 16px;
+        }
+        .info-link {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .info-link:hover {
+            text-decoration: underline;
+        }
+        .recommendation-section {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="recommendation-section">
+        <h2>추천 일정</h2>
+        <p>"<span th:text="${schedule.name}" id="scheduleName"></span>" 일정을</p>
+        <p><span th:text="${adjustDays}"></span> 일 동안</p>
+        <p>하루 <span th:text="${adjustTime}"></span> 시간 할애해서</p>
+        <p>마무리하기를 추천드릴게요.</p>
+    </div>
+
+    <!-- 관련 정보 크롤링 섹션 추가 -->
+    <div class="info-section">
+        <div class="info-title">관련 정보 크롤링</div>
+        <div id="info-content" class="info-content">
+            <!-- 크롤링된 정보와 URL이 삽입됩니다. -->
+        </div>
+        <!-- URL을 보여주는 링크 -->
+        <a id="info-link" class="info-link" href="#" target="_blank">관련 웹사이트 방문</a>
+    </div>
+
+    <!-- 날짜 선택하기 버튼 추가 -->
+    <form th:action="@{/calendarCheck/{id}(id=${id})}" method="get">
+        <button type="submit">날짜 선택하기</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const scheduleName = document.getElementById('scheduleName').textContent;
+
+        // 서버에서 관련 정보 요청
+        fetch(`/fetch-info?query=${encodeURIComponent(scheduleName)}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('info-content').textContent = data.info;
+                const infoLink = document.getElementById('info-link');
+                infoLink.href = data.url;
+                infoLink.textContent = data.url;
+            })
+            .catch(error => {
+                console.error('Error fetching info:', error);
+                document.getElementById('info-content').textContent = '정보를 가져오는 중 오류가 발생했습니다.';
+            });
+    });
+</script>
+</body>
+</html>
